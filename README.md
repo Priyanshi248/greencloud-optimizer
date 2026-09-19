@@ -369,21 +369,7 @@ pip install -r requirements.txt
 
 ### Configure Environment
 
-Create a `.env` file:
-
-```env
-APP_NAME=GreenCloud Optimizer
-APP_VERSION=1.0.0
-DEBUG=true
-
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5433/greencloud
-
-OPENROUTER_API_KEY=your_openrouter_api_key
-OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
-
-LLM_MODEL=openai/gpt-5-mini
-EMBEDDING_MODEL=openai/text-embedding-3-small
-```
+Create a `.env` file
 
 ### Start PostgreSQL
 
@@ -403,21 +389,11 @@ alembic upgrade head
 uvicorn app.main:app --reload
 ```
 
-The API will be available at:
-
-```text
-http://127.0.0.1:8000
-```
-
 ---
 
 ## API Documentation
 
-Interactive API documentation is available through Swagger:
-
-```text
-http://127.0.0.1:8000/docs
-```
+Interactive API documentation is available through Swagger
 
 ### Main Endpoints
 
