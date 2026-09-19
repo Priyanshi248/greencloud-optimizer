@@ -1,0 +1,25 @@
+# Web API
+fastapi
+uvicorn[standard]
+
+# Configuration & Validation
+pydantic
+pydantic-settings
+python-dotenv
+
+# PostgreSQL + ORM
+sqlalchemy
+asyncpg
+alembic
+pgvector
+
+# OpenRouter / LLM
+openai
+
+# RAG - PDF processing
+pypdf
+
+# Testing
+pytest
+pytest-asyncio
+httpx
