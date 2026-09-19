@@ -775,3 +775,118 @@ The same /chat interface can support both:
 
 research/knowledge questions
 workload-specific optimization requests
+
+## Decision 044 — Containerize FastAPI and PostgreSQL Together
+
+**Date:** 2026-09-19
+
+### Decision
+
+Use Docker Compose to run the GreenCloud FastAPI application together with PostgreSQL and pgvector.
+
+### Reason
+
+The application depends on PostgreSQL and pgvector for persistent storage and semantic retrieval.
+
+Containerizing these components provides a reproducible development and deployment environment.
+
+### Result
+
+The project can run its backend infrastructure using Docker Compose rather than requiring PostgreSQL to be manually installed and configured on the host machine.
+
+---
+
+## Decision 045 — Run Alembic Migrations on API Container Startup
+
+**Date:** 2026-09-19
+
+### Decision
+
+Run:
+
+alembic upgrade head
+
+before starting FastAPI inside the API container.
+
+### Reason
+
+A deployment should automatically bring the database schema to the current migration revision.
+
+### Result
+
+Database schema changes can be applied automatically when the API container starts.
+
+## Decision 046 — Use PostgreSQL + pgvector in CI
+
+Date: 2026-09-19
+
+### Decision
+
+Use a PostgreSQL service with the pgvector image in GitHub Actions.
+
+### Reason
+
+The RAG implementation depends on PostgreSQL vector storage and similarity search.
+
+Testing only the Python algorithms would not verify the database-dependent parts of the system.
+
+### Result
+
+CI validates the application against a PostgreSQL environment containing the vector extension.
+
+## Decision 047 — Explicitly Enable pgvector in CI
+
+Date: 2026-09-19
+
+Decision
+
+The CI workflow explicitly runs:
+
+CREATE EXTENSION IF NOT EXISTS vector;
+
+before executing Alembic migrations.
+
+### Reason
+
+The pgvector image provides the extension, but the extension must be enabled in the target PostgreSQL database before the VECTOR(1536) column can be created.
+
+The initial CI run failed during migration because the vector type was unavailable.
+
+### Result
+
+The CI environment now reproduces the database configuration required by the GreenCloud RAG implementation, and the complete GitHub Actions workflow passes successfully.
+
+
+---
+
+# Where we are now
+
+Your project has crossed the important **engineering infrastructure** milestone:
+
+
+                    GREENCloud Optimizer
+
+                         ┌─────────┐
+                         │ FastAPI │
+                         └────┬────┘
+                              │
+             ┌────────────────┴────────────────┐
+             │                                 │
+       ┌─────▼─────┐                    ┌──────▼──────┐
+       │ AI Agent  │                    │ Optimization│
+       │            │                    │   Engine    │
+       └─────┬─────┘                    └──────┬──────┘
+             │                                 │
+        ┌────▼────┐                            │
+        │   RAG   │                            │
+        └────┬────┘                            │
+             │                                 │
+             └──────────┬──────────────────────┘
+                        ▼
+                PostgreSQL + pgvector
+                        │
+                  Docker Compose
+                        │
+                 GitHub Actions
+                        │
+                       CI ✅

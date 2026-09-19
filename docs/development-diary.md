@@ -1302,3 +1302,135 @@ This separation makes the optimization path more deterministic while retaining a
 The GreenCloud Optimizer now exposes both its research assistant and optimization agent through a working FastAPI endpoint.
 
 The project has therefore progressed from individual backend components to an integrated AI-enabled backend.
+
+## Step 26 — Dockerized Application and Database Integration
+
+### Objective
+
+The GreenCloud Optimizer backend was containerized so that the FastAPI application and PostgreSQL database can run together using Docker Compose.
+
+### Implementation
+
+A `Dockerfile` was created for the FastAPI application.
+
+The Docker image:
+
+- Uses Python 3.11
+- Installs project dependencies
+- Copies the application source
+- Includes Alembic migrations
+- Includes project scripts and data
+- Starts the FastAPI application using Uvicorn
+
+Docker Compose was configured with two services:
+
+FastAPI API
+     ↓
+PostgreSQL + pgvector
+
+The PostgreSQL service uses the pgvector/pgvector:pg16 image.
+
+### Database Networking
+
+The local development environment uses:
+
+localhost:5433
+
+for PostgreSQL access from the host machine.
+
+Inside Docker Compose, the API connects to PostgreSQL using:
+
+postgres:5432
+
+where postgres is the Docker Compose service name.
+
+### Automatic Migrations
+
+The API container was configured to run:
+
+alembic upgrade head
+
+before starting Uvicorn.
+
+This ensures that the database schema is updated automatically when the application container starts.
+
+### Outcome
+
+The GreenCloud API and PostgreSQL database successfully run together through Docker Compose.
+
+
+## Step 27 — GitHub Actions Continuous Integration
+
+### Objective
+
+A GitHub Actions CI pipeline was added to automatically validate the GreenCloud Optimizer whenever changes are pushed to the main branch or a pull request is created.
+
+### CI Pipeline
+
+The workflow performs the following steps:
+
+Checkout repository
+        ↓
+Set up Python 3.11
+        ↓
+Install dependencies
+        ↓
+Start PostgreSQL + pgvector
+        ↓
+Configure test environment
+        ↓
+Enable pgvector extension
+        ↓
+Run Alembic migrations
+        ↓
+Run pytest
+
+### Pytest Configuration
+
+A pytest.ini file was added to ensure that:
+
+automated tests are collected only from tests/
+the project root is available for Python imports
+asynchronous tests are handled automatically using pytest-asyncio
+
+The configuration is:
+
+[pytest]
+testpaths = tests
+pythonpath = .
+asyncio_mode = auto
+CI Database Configuration
+
+The GitHub Actions workflow creates a fresh PostgreSQL database for each CI run.
+
+Because the application uses pgvector for semantic retrieval, the workflow explicitly enables the PostgreSQL vector extension before running Alembic migrations:
+
+CREATE EXTENSION IF NOT EXISTS vector;
+
+This ensures that the VECTOR(1536) column used by the RAG document store can be created during migration.
+
+### Testing
+
+The local automated test suite successfully passed:
+
+9 passed
+
+The same test suite was then executed in the GitHub Actions environment using PostgreSQL and pgvector.
+
+The GitHub Actions workflow completed successfully with all checks green.
+
+### Outcome
+
+The project now has a reproducible continuous integration pipeline that validates:
+
+Python dependencies
+PostgreSQL connectivity
+pgvector availability
+Alembic migrations
+deterministic optimization algorithms
+energy calculations
+carbon calculations
+cost calculations
+baseline scheduling
+
+This provides automated verification of the backend whenever code is pushed to GitHub.
