@@ -10,6 +10,7 @@ app = FastAPI(
     version="1.0.0",
 )
 
+
 app.include_router(
     workloads_router,
     prefix="/api",
@@ -26,7 +27,7 @@ app.include_router(
 )
 
 
-@app.get("/api/")
+@app.get("/api")
 async def root():
     return {
         "message": "GreenCloud Optimizer API",
