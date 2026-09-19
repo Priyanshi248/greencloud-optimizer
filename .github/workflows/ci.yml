@@ -79,7 +79,20 @@ jobs:
 
 
       # ---------------------------------------------------
-      # 5. Run database migrations
+      # 5. Enable PostgreSQL vector extension
+      # ---------------------------------------------------
+
+      - name: Enable pgvector extension
+        run: |
+          PGPASSWORD=postgres psql \
+            -h localhost \
+            -U postgres \
+            -d greencloud \
+            -c "CREATE EXTENSION IF NOT EXISTS vector;"
+
+
+      # ---------------------------------------------------
+      # 6. Run database migrations
       # ---------------------------------------------------
 
       - name: Run Alembic migrations
@@ -88,7 +101,7 @@ jobs:
 
 
       # ---------------------------------------------------
-      # 6. Run automated tests
+      # 7. Run automated tests
       # ---------------------------------------------------
 
       - name: Run tests
