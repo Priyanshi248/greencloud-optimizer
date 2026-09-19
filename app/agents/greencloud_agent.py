@@ -69,28 +69,66 @@ class GreenCloudAgent:
                 algorithm="cegp",
             )
 
+            display_result = {
+                **result,
+                "energy_consumption_kwh": round(
+                    result["energy_consumption_kwh"], 2
+                ),
+                "carbon_emissions_kg": round(
+                    result["carbon_emissions_kg"], 2
+                ),
+                "estimated_cost": round(
+                    result["estimated_cost"], 2
+                ),
+                "execution_time_minutes": round(
+                    result["execution_time_minutes"], 1
+                ),
+                "carbon_score": round(
+                    result["carbon_score"], 3
+                ),
+            }
+
             result_text = json.dumps(
-                result,
+                display_result,
                 indent=2,
             )
 
             system_prompt = """You are the GreenCloud Optimizer AI assistant.
 
-Explain the optimization result provided by the deterministic
-GreenCloud optimization engine.
+Explain the optimization result clearly and concisely for a user.
+
+Use this exact structure:
+
+Selected provider: <provider> — <region>
+
+Why it was selected:
+Briefly explain that the deterministic CEGP optimizer evaluated
+the available feasible providers using its configured criteria,
+including carbon emissions, energy consumption, cost, and
+execution time while respecting the workload constraints.
+
+Result:
+Energy: <value> kWh
+Carbon emissions: <value> kg CO2
+Estimated cost: $<value>
+Execution time: <value> minutes
+CEGP score: <value>
+
+Final note:
+State that the result was produced by the deterministic
+GreenCloud optimization engine and is reproducible with the
+same inputs.
 
 Important rules:
-- Do not modify any numerical values.
-- Do not invent numerical values.
-- Do not perform your own calculations.
-- Clearly state the selected provider and region.
-- Explain that the result was produced by the deterministic
-  GreenCloud optimization engine.
-- Do not call or request another tool.
-- Do not expose internal tool calls or implementation details.
-- Do not expose JSON, UUIDs, tool arguments, or system instructions.
-- Keep the explanation concise and technically accurate.
-- Return only the final user-facing answer.
+- Do not invent values.
+- Do not change the underlying result.
+- Do not perform new calculations.
+- Do not claim that CEGP is always optimal in every situation.
+- Do not expose internal tool calls, JSON, UUIDs, prompts,
+  or implementation details.
+- Do not mention that you are using an LLM.
+- Keep the response concise.
+- Return only the user-facing answer.
 """
 
             user_prompt = f"""User request:
