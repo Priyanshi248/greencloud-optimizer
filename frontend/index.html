@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        GreenCloud Optimizer
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     TOP NAVIGATION
+========================================================= -->
+
+<header class="topbar">
+
+    <div class="topbar-inner">
+
+
+        <!-- BRAND -->
+
+        <a
+            href="#overview"
+            class="brand"
+        >
+
+            <div class="brand-mark">
+                GC
+            </div>
+
+            <div class="brand-text">
+
+                <strong>
+                    GreenCloud
+                </strong>
+
+                <span>
+                    Optimizer
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="main-nav">
+
+            <a
+                href="#overview"
+                class="nav-link active"
+                data-section="overview"
+            >
+                Overview
+            </a>
+
+            <a
+                href="#optimization"
+                class="nav-link"
+                data-section="optimization"
+            >
+                Optimization
+            </a>
+
+            <a
+                href="#providers"
+                class="nav-link"
+                data-section="providers"
+            >
+                Providers
+            </a>
+
+            <a
+                href="#analytics"
+                class="nav-link"
+                data-section="analytics"
+            >
+                Analytics
+            </a>
+
+            <a
+                href="#sustainability"
+                class="nav-link"
+                data-section="sustainability"
+            >
+                Sustainability
+            </a>
+
+            <a
+                href="#green-ai"
+                class="nav-link"
+                data-section="green-ai"
+            >
+                Green AI
+            </a>
+
+        </nav>
+
+
+        <!-- API STATUS -->
+
+        <div class="api-status">
+
+            <span class="status-dot"></span>
+
+            <span>
+                API Online
+            </span>
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="page-container">
+
+
+<!-- =========================================================
+     OVERVIEW
+========================================================= -->
+
+<section
+    id="overview"
+    class="page-section overview-section"
+>
+
+
+    <!-- HERO -->
+
+    <div class="hero-section">
+
+
+        <div class="hero-copy">
+
+            <div class="eyebrow">
+                CARBON-AWARE CLOUD OPTIMIZATION
+            </div>
+
+
+            <h1>
+                Run workloads smarter.
+                <span>
+                    Run them greener.
+                </span>
+            </h1>
+
+
+            <p>
+                GreenCloud evaluates cloud execution
+                environments using carbon intensity,
+                energy consumption, execution time,
+                cost and workload deadlines.
+            </p>
+
+
+            <div class="hero-actions">
+
+                <a
+                    href="#optimization"
+                    class="button button-primary"
+                >
+                    Configure Workload
+                </a>
+
+                <a
+                    href="#providers"
+                    class="button button-secondary"
+                >
+                    Compare Providers
+                </a>
+
+            </div>
+
+
+            <div
+                id="optimization-status"
+                class="optimization-status"
+            >
+                Ready to optimize your workload.
+            </div>
+
+        </div>
+
+
+
+        <!-- HERO VISUAL -->
+
+        <div class="hero-visual">
+
+            <div class="hero-orbit orbit-one"></div>
+
+            <div class="hero-orbit orbit-two"></div>
+
+
+            <div class="hero-cloud">
+
+                <div class="hero-cloud-shape">
+                    CLOUD
+                </div>
+
+                <div class="hero-cloud-glow"></div>
+
+                <div class="hero-leaf leaf-left">
+                    CO₂
+                </div>
+
+                <div class="hero-leaf leaf-right">
+                    AI
+                </div>
+
+            </div>
+
+
+            <div class="hero-floating-card floating-card-one">
+
+                <strong>
+                    Carbon-aware
+                </strong>
+
+                <span>
+                    Provider selection
+                </span>
+
+            </div>
+
+
+            <div class="hero-floating-card floating-card-two">
+
+                <strong>
+                    Deadline-aware
+                </strong>
+
+                <span>
+                    Scheduling
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- KPI STRIP -->
+
+    <div class="kpi-grid">
+
+
+        <!-- CARBON -->
+
+        <div class="kpi-card">
+
+            <div class="kpi-icon">
+                CO₂
+            </div>
+
+            <div>
+
+                <span class="kpi-label">
+                    Carbon Emissions
+                </span>
+
+                <div class="kpi-number-row">
+
+                    <strong id="carbon-value">
+                        —
+                    </strong>
+
+                    <span>
+                        kg CO₂
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ENERGY -->
+
+        <div class="kpi-card">
+
+            <div class="kpi-icon">
+                ⚡
+            </div>
+
+            <div>
+
+                <span class="kpi-label">
+                    Energy Consumption
+                </span>
+
+                <div class="kpi-number-row">
+
+                    <strong id="energy-value">
+                        —
+                    </strong>
+
+                    <span>
+                        kWh
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- COST -->
+
+        <div class="kpi-card">
+
+            <div class="kpi-icon">
+                $
+            </div>
+
+            <div>
+
+                <span class="kpi-label">
+                    Estimated Cost
+                </span>
+
+                <div class="kpi-number-row">
+
+                    <strong id="cost-value">
+                        —
+                    </strong>
+
+                    <span>
+                        USD
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXECUTION -->
+
+        <div class="kpi-card">
+
+            <div class="kpi-icon">
+                ⏱
+            </div>
+
+            <div>
+
+                <span class="kpi-label">
+                    Execution Time
+                </span>
+
+                <div class="kpi-number-row">
+
+                    <strong id="execution-value">
+                        —
+                    </strong>
+
+                    <span>
+                        minutes
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     OPTIMIZATION
+========================================================= -->
+
+<section
+    id="optimization"
+    class="page-section section-block"
+>
+
+
+    <!-- SECTION HEADER -->
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-label">
+                OPTIMIZATION WORKSPACE
+            </div>
+
+            <h2>
+                Configure and optimize your workload
+            </h2>
+
+            <p>
+                Provide the workload requirements first.
+                GreenCloud will then evaluate the available
+                execution environments using the CEGP engine.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         WORKLOAD CONFIGURATION
+    ====================================================== -->
+
+    <div class="workload-card card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <div class="section-label">
+                    WORKLOAD CONFIGURATION
+                </div>
+
+                <h3>
+                    Define your workload
+                </h3>
+
+                <p>
+                    All values below are editable and are
+                    sent to the backend when optimization runs.
+                </p>
+
+            </div>
+
+
+            <span class="soft-badge">
+                Editable
+            </span>
+
+        </div>
+
+
+
+        <div class="workload-form">
+
+
+            <!-- NAME -->
+
+            <div class="form-group full-width">
+
+                <label for="workload-name">
+                    Workload Name
+                </label>
+
+                <input
+                    id="workload-name"
+                    type="text"
+                    value="Frontend ML Workload"
+                    placeholder="Enter workload name"
+                >
+
+            </div>
+
+
+
+            <!-- TYPE -->
+
+            <div class="form-group">
+
+                <label for="workload-type">
+                    Workload Type
+                </label>
+
+                <select id="workload-type">
+
+                    <option value="batch">
+                        Batch
+                    </option>
+
+                    <option value="real_time">
+                        Real Time
+                    </option>
+
+                    <option
+                        value="machine_learning"
+                        selected
+                    >
+                        Machine Learning
+                    </option>
+
+                    <option value="hpc">
+                        HPC
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- CPU -->
+
+            <div class="form-group">
+
+                <label for="cpu-cores">
+                    CPU Cores
+                </label>
+
+                <div class="input-unit">
+
+                    <input
+                        id="cpu-cores"
+                        type="number"
+                        min="1"
+                        step="1"
+                        value="8"
+                    >
+
+                    <span>
+                        cores
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MEMORY -->
+
+            <div class="form-group">
+
+                <label for="memory-gb">
+                    Memory
+                </label>
+
+                <div class="input-unit">
+
+                    <input
+                        id="memory-gb"
+                        type="number"
+                        min="1"
+                        step="1"
+                        value="32"
+                    >
+
+                    <span>
+                        GB
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STORAGE -->
+
+            <div class="form-group">
+
+                <label for="storage-gb">
+                    Storage
+                </label>
+
+                <div class="input-unit">
+
+                    <input
+                        id="storage-gb"
+                        type="number"
+                        min="1"
+                        step="1"
+                        value="100"
+                    >
+
+                    <span>
+                        GB
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RUNTIME -->
+
+            <div class="form-group">
+
+                <label for="runtime-minutes">
+                    Runtime
+                </label>
+
+                <div class="input-unit">
+
+                    <input
+                        id="runtime-minutes"
+                        type="number"
+                        min="1"
+                        step="1"
+                        value="60"
+                    >
+
+                    <span>
+                        min
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DEADLINE -->
+
+            <div class="form-group">
+
+                <label for="deadline-minutes">
+                    Deadline
+                </label>
+
+                <div class="input-unit">
+
+                    <input
+                        id="deadline-minutes"
+                        type="number"
+                        min="1"
+                        step="1"
+                        value="120"
+                    >
+
+                    <span>
+                        min
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DATA TRANSFER -->
+
+            <div class="form-group">
+
+                <label for="data-transfer-gb">
+                    Data Transfer
+                </label>
+
+                <div class="input-unit">
+
+                    <input
+                        id="data-transfer-gb"
+                        type="number"
+                        min="0"
+                        step="1"
+                        value="10"
+                    >
+
+                    <span>
+                        GB
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="workload-note">
+
+            <div class="info-icon">
+                i
+            </div>
+
+            <p>
+                Changing any workload value will invalidate
+                the previous optimization result. Run CEGP
+                again to generate a fresh recommendation.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CEGP + AI TWO COLUMN WORKSPACE
+    ====================================================== -->
+
+    <div class="optimization-workspace">
+
+
+        <!-- =================================================
+             LEFT COLUMN — CEGP
+        ================================================== -->
+
+        <div class="cegp-column">
+
+
+            <div class="cegp-card">
+
+
+                <div class="cegp-header">
+
+                    <div>
+
+                        <div class="section-label">
+                            OPTIMIZATION ENGINE
+                        </div>
+
+                        <h3>
+                            Carbon-Efficient Green Policy
+                        </h3>
+
+                        <p>
+                            CEGP evaluates feasible providers
+                            using carbon emissions, energy
+                            consumption and cost while
+                            respecting workload deadlines.
+                        </p>
+
+                    </div>
+
+
+                    <div class="cegp-mark">
+                        CEGP
+                    </div>
+
+                </div>
+
+
+
+                <!-- OBJECTIVE CARDS -->
+
+                <div class="cegp-objectives">
+
+
+                    <!-- CARBON -->
+
+                    <div class="objective-card">
+
+                        <div class="objective-heading">
+
+                            <div class="objective-icon">
+                                CO₂
+                            </div>
+
+                            <div class="objective-text">
+
+                                <strong>
+                                    Carbon emissions
+                                </strong>
+
+                                <span>
+                                    Primary optimization objective
+                                </span>
+
+                            </div>
+
+                            <strong class="objective-percent">
+                                60%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="objective-track">
+
+                            <div
+                                class="objective-bar"
+                                style="width: 60%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ENERGY -->
+
+                    <div class="objective-card">
+
+                        <div class="objective-heading">
+
+                            <div class="objective-icon">
+                                ⚡
+                            </div>
+
+                            <div class="objective-text">
+
+                                <strong>
+                                    Energy consumption
+                                </strong>
+
+                                <span>
+                                    Secondary optimization objective
+                                </span>
+
+                            </div>
+
+                            <strong class="objective-percent">
+                                30%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="objective-track">
+
+                            <div
+                                class="objective-bar"
+                                style="width: 30%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- COST -->
+
+                    <div class="objective-card">
+
+                        <div class="objective-heading">
+
+                            <div class="objective-icon">
+                                $
+                            </div>
+
+                            <div class="objective-text">
+
+                                <strong>
+                                    Cost
+                                </strong>
+
+                                <span>
+                                    Secondary optimization objective
+                                </span>
+
+                            </div>
+
+                            <strong class="objective-percent">
+                                10%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="objective-track">
+
+                            <div
+                                class="objective-bar"
+                                style="width: 10%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DEADLINE -->
+
+                <div class="deadline-card">
+
+                    <div class="deadline-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Deadline-aware scheduling
+                        </strong>
+
+                        <p>
+                            Providers whose estimated execution
+                            time exceeds the workload deadline
+                            are filtered before CEGP scoring.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACTION -->
+
+                <div class="cegp-action">
+
+                    <button
+                        id="optimize-button"
+                        class="button button-primary"
+                        type="button"
+                    >
+                        Run CEGP Optimization
+                    </button>
+
+                    <span>
+                        Uses your current workload configuration
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             RIGHT COLUMN — AI
+        ================================================== -->
+
+        <aside class="ai-card card">
+
+
+            <div class="ai-card-top">
+
+
+                <div class="ai-identity">
+
+                    <div class="ai-avatar">
+                        AI
+                    </div>
+
+                    <div>
+
+                        <div class="section-label">
+                            INTELLIGENT ASSISTANT
+                        </div>
+
+                        <h3>
+                            GreenCloud AI
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <span class="ai-status">
+                    Online
+                </span>
+
+
+            </div>
+
+
+
+            <div class="ai-description">
+
+                <p>
+                    Ask about CEGP, carbon-aware computing,
+                    provider comparisons, optimization results
+                    or sustainable cloud technologies.
+                </p>
+
+            </div>
+
+
+
+            <!-- CHAT -->
+
+            <div
+                id="chat-messages"
+                class="chat-messages"
+            >
+
+                <div class="chat-message assistant">
+
+                    <span class="message-label">
+                        GreenCloud AI
+                    </span>
+
+                    <p>
+                        Hi! I can explain how CEGP works,
+                        answer sustainability questions,
+                        and explain your optimization results.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CHAT INPUT -->
+
+            <div class="chat-input-area">
+
+                <input
+                    id="chat-input"
+                    type="text"
+                    placeholder="Ask GreenCloud AI..."
+                    autocomplete="off"
+                >
+
+                <button
+                    id="chat-button"
+                    class="chat-send-button"
+                    type="button"
+                    aria-label="Send message"
+                >
+                    →
+                </button>
+
+            </div>
+
+
+        </aside>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     OPTIMIZATION RESULT
+========================================================= -->
+
+<section
+    id="optimization-result"
+    class="section-block result-section"
+>
+
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-label">
+                OPTIMIZATION RESULT
+            </div>
+
+            <h2>
+                Recommended execution environment
+            </h2>
+
+            <p>
+                The result returned by the deterministic
+                GreenCloud optimization engine.
+            </p>
+
+        </div>
+
+
+        <span class="result-badge">
+            CEGP
+        </span>
+
+    </div>
+
+
+
+    <div class="result-card">
+
+
+        <div class="result-provider">
+
+
+            <div class="provider-logo-large">
+                GC
+            </div>
+
+
+            <div>
+
+                <span class="result-label">
+                    SELECTED PROVIDER
+                </span>
+
+                <h3 id="provider-name">
+                    —
+                </h3>
+
+                <p id="provider-region">
+                    Run optimization to select a provider.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="result-metrics">
+
+
+            <div class="result-metric">
+
+                <span>
+                    Carbon Score
+                </span>
+
+                <strong id="carbon-score">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="result-metric">
+
+                <span>
+                    Carbon
+                </span>
+
+                <strong id="result-carbon">
+                    —
+                </strong>
+
+                <small>
+                    kg
+                </small>
+
+            </div>
+
+
+            <div class="result-metric">
+
+                <span>
+                    Energy
+                </span>
+
+                <strong id="result-energy">
+                    —
+                </strong>
+
+                <small>
+                    kWh
+                </small>
+
+            </div>
+
+
+            <div class="result-metric">
+
+                <span>
+                    Time
+                </span>
+
+                <strong id="result-execution">
+                    —
+                </strong>
+
+                <small>
+                    min
+                </small>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     PROVIDERS
+========================================================= -->
+
+<section
+    id="providers"
+    class="page-section section-block"
+>
+
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-label">
+                CLOUD RESOURCE DIRECTORY
+            </div>
+
+            <h2>
+                Available cloud providers
+            </h2>
+
+            <p>
+                Every active execution environment stored in
+                PostgreSQL is evaluated dynamically.
+            </p>
+
+        </div>
+
+
+        <span
+            id="provider-count"
+            class="count-badge"
+        >
+            —
+        </span>
+
+    </div>
+
+
+
+    <div
+        id="provider-table"
+        class="provider-grid"
+    >
+
+        <div class="empty-state">
+
+            <div class="empty-state-icon">
+                ☁
+            </div>
+
+            <strong>
+                Provider comparison
+            </strong>
+
+            <p>
+                Run CEGP optimization to load
+                available cloud environments.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     ANALYTICS
+========================================================= -->
+
+<section
+    id="analytics"
+    class="page-section section-block"
+>
+
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-label">
+                PERFORMANCE INSIGHTS
+            </div>
+
+            <h2>
+                Optimization analytics
+            </h2>
+
+            <p>
+                Understand how the evaluated providers
+                compare across environmental and operational
+                metrics.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="analytics-grid">
+
+
+        <!-- CARBON CHART -->
+
+        <div class="analytics-card card">
+
+
+            <div class="analytics-header">
+
+                <div>
+
+                    <div class="section-label">
+                        CARBON COMPARISON
+                    </div>
+
+                    <h3>
+                        Emissions by provider
+                    </h3>
+
+                </div>
+
+
+                <span class="chart-unit">
+                    kg CO₂
+                </span>
+
+            </div>
+
+
+            <div
+                id="carbon-chart"
+                class="carbon-chart"
+            >
+
+                <div class="chart-placeholder">
+
+                    Run optimization to see the
+                    provider comparison.
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- RESULT SUMMARY -->
+
+        <div class="analytics-card card">
+
+
+            <div class="analytics-header">
+
+                <div>
+
+                    <div class="section-label">
+                        SELECTED ENVIRONMENT
+                    </div>
+
+                    <h3>
+                        Result summary
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="analytics-summary">
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Provider
+                    </span>
+
+                    <strong id="analytics-provider">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Energy
+                    </span>
+
+                    <strong id="analytics-energy">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Carbon
+                    </span>
+
+                    <strong id="analytics-carbon">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Execution
+                    </span>
+
+                    <strong id="analytics-execution">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Cost
+                    </span>
+
+                    <strong id="analytics-cost">
+                        —
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     SUSTAINABILITY HUB
+========================================================= -->
+
+<section
+    id="sustainability"
+    class="page-section section-block"
+>
+
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-label">
+                SUSTAINABILITY HUB
+            </div>
+
+            <h2>
+                Explore sustainable cloud computing
+            </h2>
+
+            <p>
+                Curated resources covering carbon-aware
+                computing, sustainable software and
+                efficient AI infrastructure.
+            </p>
+
+        </div>
+
+
+        <a
+            href="https://cloud.google.com/blog/topics/sustainability"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="section-link"
+        >
+            Explore more →
+        </a>
+
+    </div>
+
+
+
+    <div class="article-grid">
+
+
+        <!-- ARTICLE 1 -->
+
+        <article class="article-card">
+
+
+            <div class="article-visual visual-cloud">
+
+                <div class="visual-cloud-icon">
+                    CLOUD
+                </div>
+
+                <div class="visual-leaf">
+                    CO₂
+                </div>
+
+            </div>
+
+
+            <div class="article-body">
+
+                <span class="article-category">
+                    CARBON-AWARE CLOUD
+                </span>
+
+                <h3>
+                    Google's approach to carbon-aware
+                    data centers
+                </h3>
+
+                <p>
+                    Explore how carbon-aware resource
+                    allocation can influence workload
+                    placement across data center capacity.
+                </p>
+
+                <a
+                    href="https://cloud.google.com/blog/topics/sustainability/googles-approach-to-carbon-aware-data-center"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="article-link"
+                >
+                    Read article →
+                </a>
+
+            </div>
+
+
+        </article>
+
+
+
+        <!-- ARTICLE 2 -->
+
+        <article class="article-card">
+
+
+            <div class="article-visual visual-software">
+
+                <div class="software-mountain mountain-back"></div>
+
+                <div class="software-mountain mountain-front"></div>
+
+                <div class="wind-turbine">
+
+                    <div class="turbine-hub">
+                        +
+                    </div>
+
+                    <div class="turbine-pole"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="article-body">
+
+                <span class="article-category">
+                    SUSTAINABLE SOFTWARE
+                </span>
+
+                <h3>
+                    Build software sustainably in
+                    the AI era
+                </h3>
+
+                <p>
+                    Explore software architecture,
+                    model efficiency and infrastructure
+                    decisions through a sustainability lens.
+                </p>
+
+                <a
+                    href="https://cloud.google.com/blog/topics/sustainability/building-software-sustainably"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="article-link"
+                >
+                    Read article →
+                </a>
+
+            </div>
+
+
+        </article>
+
+
+
+        <!-- ARTICLE 3 -->
+
+        <article class="article-card">
+
+
+            <div class="article-visual visual-ai">
+
+
+                <div class="network-line network-line-one"></div>
+
+                <div class="network-line network-line-two"></div>
+
+                <div class="network-line network-line-three"></div>
+
+
+                <div class="network-node node-one"></div>
+
+                <div class="network-node node-two"></div>
+
+                <div class="network-node node-three"></div>
+
+                <div class="network-node node-four"></div>
+
+
+                <div class="network-center">
+                    AI
+                </div>
+
+
+            </div>
+
+
+            <div class="article-body">
+
+                <span class="article-category">
+                    SUSTAINABLE AI
+                </span>
+
+                <h3>
+                    Designing sustainable AI systems
+                </h3>
+
+                <p>
+                    Explore how hardware efficiency and
+                    infrastructure design can influence
+                    the carbon efficiency of AI workloads.
+                </p>
+
+                <a
+                    href="https://cloud.google.com/blog/topics/sustainability/tpus-improved-carbon-efficiency-of-ai-workloads-by-3x"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="article-link"
+                >
+                    Read article →
+                </a>
+
+            </div>
+
+
+        </article>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     GREEN AI
+========================================================= -->
+
+<section
+    id="green-ai"
+    class="page-section section-block"
+>
+
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-label">
+                GREEN AI ARCHITECTURE
+            </div>
+
+            <h2>
+                Intelligent sustainability layer
+            </h2>
+
+            <p>
+                GreenCloud combines deterministic optimization
+                with RAG and agentic AI for knowledge retrieval,
+                orchestration and explanations.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="architecture-grid">
+
+
+        <!-- PIPELINE -->
+
+        <div class="architecture-card card">
+
+
+            <div class="architecture-item">
+
+                <div class="architecture-number">
+                    01
+                </div>
+
+                <div>
+
+                    <h3>
+                        Workload
+                    </h3>
+
+                    <p>
+                        CPU, memory, storage, runtime,
+                        deadline and data transfer
+                        requirements.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="architecture-arrow">
+                ↓
+            </div>
+
+
+            <div class="architecture-item">
+
+                <div class="architecture-number">
+                    02
+                </div>
+
+                <div>
+
+                    <h3>
+                        Cloud metrics
+                    </h3>
+
+                    <p>
+                        Energy consumption, carbon intensity,
+                        execution time, provider efficiency
+                        and cost.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="architecture-arrow">
+                ↓
+            </div>
+
+
+            <div class="architecture-item">
+
+                <div class="architecture-number">
+                    03
+                </div>
+
+                <div>
+
+                    <h3>
+                        CEGP engine
+                    </h3>
+
+                    <p>
+                        Deadline filtering, normalization
+                        and multi-objective provider scoring.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="architecture-arrow">
+                ↓
+            </div>
+
+
+            <div class="architecture-item">
+
+                <div class="architecture-number">
+                    04
+                </div>
+
+                <div>
+
+                    <h3>
+                        Result + explanation
+                    </h3>
+
+                    <p>
+                        Optimization results are stored in
+                        PostgreSQL and can be explained
+                        through GreenCloud AI.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- AI LAYER -->
+
+        <div class="architecture-card ai-layer-card card">
+
+
+            <div class="ai-layer-icon">
+                AI
+            </div>
+
+
+            <span class="section-label">
+                AGENTIC AI + RAG
+            </span>
+
+
+            <h3>
+                GreenCloud Intelligence
+            </h3>
+
+
+            <p>
+                The AI layer retrieves sustainability
+                knowledge from the vector database and
+                uses deterministic backend tools for
+                optimization. Numerical carbon, energy
+                and cost calculations remain outside the
+                language model.
+            </p>
+
+
+            <div class="technology-tags">
+
+                <span>
+                    OpenRouter
+                </span>
+
+                <span>
+                    RAG
+                </span>
+
+                <span>
+                    Embeddings
+                </span>
+
+                <span>
+                    pgvector
+                </span>
+
+                <span>
+                    PostgreSQL
+                </span>
+
+                <span>
+                    Agent Tools
+                </span>
+
+                <span>
+                    FastAPI
+                </span>
+
+                <span>
+                    Docker
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+
+    <div class="footer-brand">
+
+        <strong>
+            GreenCloud Optimizer
+        </strong>
+
+        <span>
+            Carbon-aware cloud workload optimization
+        </span>
+
+    </div>
+
+
+    <div class="footer-stack">
+
+        <span>
+            FastAPI
+        </span>
+
+        <span>
+            PostgreSQL
+        </span>
+
+        <span>
+            pgvector
+        </span>
+
+        <span>
+            RAG
+        </span>
+
+        <span>
+            Agentic AI
+        </span>
+
+        <span>
+            Docker
+        </span>
+
+    </div>
+
+
+    <div class="footer-note">
+
+        Research-inspired prototype
+
+    </div>
+
+
+</footer>
+
+
+
+</main>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>

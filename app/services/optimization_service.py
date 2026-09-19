@@ -3,14 +3,8 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.algorithms.baseline import (
-    BaselineCandidate,
-    ESTBaseline,
-)
-from app.algorithms.cegp import (
-    CandidateMetrics,
-    CEGPAlgorithm,
-)
+from app.algorithms.baseline import BaselineCandidate, ESTBaseline
+from app.algorithms.cegp import CandidateMetrics, CEGPAlgorithm
 from app.models.cloud_provider import CloudProvider
 from app.models.optimization_result import OptimizationResult
 from app.models.workload import Workload
@@ -20,12 +14,6 @@ from app.services.energy_service import EnergyService
 
 
 class OptimizationService:
-    """
-    Orchestrates the GreenCloud optimization workflow.
-
-    This service connects database entities, deterministic
-    calculation services and optimization algorithms.
-    """
 
     def __init__(self, db: AsyncSession):
         self.db = db
@@ -35,22 +23,15 @@ class OptimizationService:
         self,
         workload: Workload,
         algorithm: str = "cegp",
-    ) -> OptimizationResult:
-        """
-        Optimize a workload across all active cloud providers.
-
-        Supported algorithms:
-        - cegp
-        - est
-        """
-
+    ):
         # ---------------------------------------------------------
-        # 1. Retrieve active cloud providers
+        # 1. Get all active cloud providers
         # ---------------------------------------------------------
 
         result = await self.db.execute(
-            select(CloudProvider)
-            .where(CloudProvider.is_active.is_(True))
+            select(CloudProvider).where(
+                CloudProvider.is_active.is_(True)
+            )
         )
 
         providers = result.scalars().all()
@@ -64,19 +45,17 @@ class OptimizationService:
         # 2. Calculate metrics for every provider
         # ---------------------------------------------------------
 
-        cegp_candidates: list[CandidateMetrics] = []
-        est_candidates: list[BaselineCandidate] = []
+        cegp_candidates = []
+        est_candidates = []
 
         for provider in providers:
 
-            # Get the latest available carbon intensity.
             carbon_intensity = (
                 await self.carbon_service.get_latest_carbon_intensity(
                     provider.id
                 )
             )
 
-            # Calculate deterministic metrics.
             energy_kwh = EnergyService.calculate_energy(
                 workload,
                 provider,
@@ -92,9 +71,10 @@ class OptimizationService:
                 provider,
             )
 
-            # -----------------------------------------------------
-            # Candidate for CEGP
-            # -----------------------------------------------------
+            execution_time = (
+                workload.runtime_minutes
+                * provider.execution_time_factor
+            )
 
             cegp_candidates.append(
                 CandidateMetrics(
@@ -102,15 +82,9 @@ class OptimizationService:
                     energy_kwh=energy_kwh,
                     carbon_kg=carbon_kg,
                     cost=cost,
-                    execution_time_minutes=(
-                        workload.runtime_minutes * provider.execution_time_factor
-                    ),
+                    execution_time_minutes=execution_time,
                 )
             )
-
-            # -----------------------------------------------------
-            # Candidate for EST baseline
-            # -----------------------------------------------------
 
             est_candidates.append(
                 BaselineCandidate(
@@ -118,9 +92,7 @@ class OptimizationService:
                     energy_kwh=energy_kwh,
                     carbon_kg=carbon_kg,
                     cost=cost,
-                    execution_time_minutes=(
-                        workload.runtime_minutes * provider.execution_time_factor
-                    ),
+                    execution_time_minutes=execution_time,
                 )
             )
 
@@ -130,9 +102,7 @@ class OptimizationService:
 
         if algorithm.lower() == "cegp":
 
-            optimizer = CEGPAlgorithm()
-
-            selected = optimizer.optimize(
+            selected = CEGPAlgorithm().optimize(
                 candidates=cegp_candidates,
                 deadline_minutes=workload.deadline_minutes,
             )
@@ -141,9 +111,7 @@ class OptimizationService:
 
         elif algorithm.lower() == "est":
 
-            optimizer = ESTBaseline()
-
-            selected = optimizer.optimize(
+            selected = ESTBaseline().optimize(
                 candidates=est_candidates,
                 deadline_minutes=workload.deadline_minutes,
             )
@@ -156,14 +124,10 @@ class OptimizationService:
             )
 
         # ---------------------------------------------------------
-        # 4. Convert provider ID back to UUID
+        # 4. Create optimization result
         # ---------------------------------------------------------
 
         provider_id = UUID(selected.provider_id)
-
-        # ---------------------------------------------------------
-        # 5. Persist optimization result
-        # ---------------------------------------------------------
 
         optimization_result = OptimizationResult(
             workload_id=workload.id,
@@ -179,7 +143,88 @@ class OptimizationService:
         self.db.add(optimization_result)
 
         await self.db.commit()
-
         await self.db.refresh(optimization_result)
 
         return optimization_result
+
+    async def get_candidate_metrics(
+        self,
+        workload: Workload,
+    ):
+        """
+        Calculate the metrics for every active cloud provider.
+
+        This method does NOT select a provider.
+        It only evaluates every provider so the frontend
+        can display a transparent comparison.
+        """
+
+        # ---------------------------------------------------------
+        # 1. Get all active providers
+        # ---------------------------------------------------------
+
+        result = await self.db.execute(
+            select(CloudProvider).where(
+                CloudProvider.is_active.is_(True)
+            )
+        )
+
+        providers = result.scalars().all()
+
+        if not providers:
+            raise ValueError(
+                "No active cloud providers are available."
+            )
+
+        candidates = []
+
+        # ---------------------------------------------------------
+        # 2. Calculate metrics for every provider
+        # ---------------------------------------------------------
+
+        for provider in providers:
+
+            carbon_intensity = (
+                await self.carbon_service.get_latest_carbon_intensity(
+                    provider.id
+                )
+            )
+
+            energy_kwh = EnergyService.calculate_energy(
+                workload,
+                provider,
+            )
+
+            carbon_kg = CarbonService.calculate_emissions(
+                energy_kwh,
+                carbon_intensity,
+            )
+
+            cost = CostService.calculate_cost(
+                workload,
+                provider,
+            )
+
+            execution_time = (
+                workload.runtime_minutes
+                * provider.execution_time_factor
+            )
+
+            candidates.append(
+                {
+                    "provider_id": str(provider.id),
+                    "provider_name": provider.provider_name,
+                    "provider_type": provider.provider_type.value,
+                    "region": provider.region,
+                    "energy_kwh": energy_kwh,
+                    "carbon_kg": carbon_kg,
+                    "cost": cost,
+                    "execution_time_minutes": execution_time,
+                }
+            )
+
+        # ---------------------------------------------------------
+        # 3. Return all provider metrics
+        # ---------------------------------------------------------
+
+        return candidates
