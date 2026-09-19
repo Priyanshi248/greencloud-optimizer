@@ -1,6 +1,7 @@
 from logging.config import fileConfig
 
 from sqlalchemy import pool
+from sqlalchemy.engine import make_url
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
@@ -23,10 +24,47 @@ from app.models import (
 config = context.config
 
 
-# Use the same database configuration as the application.
+# Normalize the database URL for SQLAlchemy + asyncpg.
+#
+# Neon provides a standard PostgreSQL URL:
+#     postgresql://...
+#
+# Our application uses:
+#     postgresql+asyncpg://...
+#
+# We convert it here so Alembic uses the same async driver
+# as the application.
+database_url = make_url(settings.DATABASE_URL)
+
+if database_url.drivername in {"postgresql", "postgres"}:
+    database_url = database_url.set(
+        drivername="postgresql+asyncpg"
+    )
+
+
+# Neon commonly provides libpq-style parameters such as:
+# sslmode=require
+# channel_binding=require
+#
+# These are not passed directly to asyncpg.
+# Convert/remove them before creating the async engine.
+query = dict(database_url.query)
+
+if "sslmode" in query:
+    sslmode = query.pop("sslmode")
+
+    if sslmode == "require":
+        query["ssl"] = "require"
+
+query.pop("channel_binding", None)
+
+database_url = database_url.set(query=query)
+
+
+# Use the normalized URL for Alembic.
 config.set_main_option(
     "sqlalchemy.url",
-    settings.DATABASE_URL.replace("%", "%%"),
+    database_url.render_as_string(hide_password=False).replace("%", "%%"),
 )
 
 
